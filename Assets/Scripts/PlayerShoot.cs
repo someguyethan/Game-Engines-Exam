@@ -8,6 +8,7 @@ public class PlayerShoot : MonoBehaviour
     public float projectileSpeed;
     public float damage;
     public Transform shootPos;
+    public AudioSource audio;
 
     ObjectPool pool;
 
@@ -25,6 +26,7 @@ public class PlayerShoot : MonoBehaviour
             //GameObject p = Instantiate(projectile, shootPos.position, transform.rotation);
             GameObject p = pool.SpawnFromPool("Projectile", shootPos.position, transform.rotation);
             p.GetComponent<Rigidbody2D>().velocity = transform.up * projectileSpeed;
+            audio.Play();
         }
     }
 }
