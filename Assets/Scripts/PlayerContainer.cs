@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Runtime.InteropServices;
+
 
 public class PlayerContainer : MonoBehaviour
 {
@@ -13,6 +16,9 @@ public class PlayerContainer : MonoBehaviour
     public Text livesT;
     public Text timerT;
 
+    [DllImport("OnDestroyDLL")]
+    private static extern void OnDestroy();
+
     private void Start()
     {
         scoreT.text = "Score: " + score;
@@ -21,18 +27,21 @@ public class PlayerContainer : MonoBehaviour
     }
     private void Update()
     {
+
         timer -= Time.deltaTime;
         timerT.text = "Time: " + timer;
         scoreT.text = "Score: " + score;
 
         if (lives == 0)
         {
-            //game over
+            SceneManager.LoadScene("Game Over");
         }
         else if (timer <= 0f)
         {
-            //win
+            SceneManager.LoadScene("Win");
         }
+
+
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (Time.timeScale == 0)

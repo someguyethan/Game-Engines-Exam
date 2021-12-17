@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
+
 
 public class PlayerShoot : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class PlayerShoot : MonoBehaviour
     public AudioSource audio;
 
     ObjectPool pool;
+
+    [DllImport("ProjectileLifespanDLL")]
+    private static extern void ChangeLifespan();
 
     // Start is called before the first frame update
     void Start()
